@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Kolokwium_Debicki
+{
+    class Program
+    {
+        public static List<int> AA = new List<int>();
+        public static List<int> BB = new List<int>();
+
+        static void Main(string[] args)
+        {
+
+        }
+       
+       
+        //<summary>Search first fish moving upstream.</summary>
+        //<param name = "A">Sizes of the fish</param>
+        //<param name = "B">Directions of the fish</param>
+        //<param name = "actually"> actually first up stream fish</param>
+        //method returns int actually which is position of actually first up stream fish
+        public static int FirstUpStream(int[] A, int[] B, int actually)
+        {
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (B[i] == 1)
+                {
+                    actually = i;
+                    break;
+                }
+            }
+            return actually;
+        }
+
+        public static void AliveFish(int[] A, int[] B)
+        {
+            int actually = 0;
+            actually = FirstUpStream(A, B, actually);
+            for (int i = 0; i < A.Length; i++)
+            {
+                while (i < actually)
+                {
+                    AA.Add(A[i]);
+                    BB.Add(B[i]);
+                    i++;
+                }
+
+                if (B[actually] != B[i])
+                {
+                    if (A[actually] < A[i])
+                    {
+                        actually = i;
+                    }
+
+                }
+
+            }
+            AA.Add(A[actually]);
+            BB.Add(B[actually]);
+
+        }
+    }
